@@ -1,15 +1,3 @@
----
-title: Public REST API
-
-language_tabs: # must be one of https://git.io/vQNgJ
-  - curl examples
-
-toc_footers:
-  - <a href='https://merch.transcoin.me'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
-
-search: false
----
 
 # Public REST API
 
