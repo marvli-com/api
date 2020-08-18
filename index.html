@@ -313,17 +313,63 @@ pointing to direct_post_url of a created Purchase. You will also need to saturat
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
   <span class="dl">"</span><span class="s2">client</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test@test.com</span><span class="dl">"</span>
+    <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">test@test.com</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">phone</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">full_name</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">personal_code</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">legal_name</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">brand_name</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">registration_number</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">tax_number</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">bank_account</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">bank_code</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">street_address</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">city</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">zip_code</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">country</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">shipping_street_address</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">shipping_city</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">shipping_zip_code</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">shipping_country</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">cc</span><span class="dl">"</span><span class="p">:[],</span>
+    <span class="dl">"</span><span class="s2">bcc</span><span class="dl">"</span><span class="p">:[]</span>
   <span class="p">},</span>
-  <span class="dl">"</span><span class="s2">purchase</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="dl">"</span><span class="s2">products</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
-      <span class="p">{</span>
-        <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">price</span><span class="dl">"</span><span class="p">:</span> <span class="mi">100</span>
-      <span class="p">}</span>
-    <span class="p">]</span>
+  <span class="dl">"</span><span class="s2">purchase</span><span class="dl">"</span><span class="p">:</span>   <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">currency</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">EUR</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">products</span><span class="dl">"</span><span class="p">:[</span>
+        <span class="p">{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">test</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">price</span><span class="dl">"</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">quantity</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">1.0000</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">discount</span><span class="dl">"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">tax_percent</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0.00</span><span class="dl">"</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">language</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">en</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">notes</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">debt</span><span class="dl">"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">subtotal_override</span><span class="dl">"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">total_tax_override</span><span class="dl">"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">total_discount_override</span><span class="dl">"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">total_override</span><span class="dl">"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">total</span><span class="dl">"</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">request_client_details</span><span class="dl">"</span><span class="p">:[],</span>
+    <span class="dl">"</span><span class="s2">timezone</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Europe/Riga</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">due_strict</span><span class="dl">"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">email_message</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">shipping_options</span><span class="dl">"</span><span class="p">:[]</span>
   <span class="p">},</span>
-  <span class="dl">"</span><span class="s2">brand_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">409eb80e-3782-4b1d-afa8-b779759266a5</span><span class="dl">"</span>
+  <span class="dl">"</span><span class="s2">send_receipt</span><span class="dl">"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">skip_capture</span><span class="dl">"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">reference</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">due</span><span class="dl">"</span><span class="p">:</span><span class="mi">1597737053</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">payment_method_whitelist</span><span class="dl">"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">success_redirect</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">https://marvli.dev.fsm.lv/payment_success?id=43</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">failure_redirect</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">https://marvli.dev.fsm.lv/payment_failure?id=43</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">cancel_redirect</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">success_callback</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">creator_agent</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">platform</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">api</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">market_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">5</span><span class="dl">"</span>
 <span class="p">}</span>
 </code></pre></div>
 <blockquote>
@@ -340,44 +386,233 @@ pointing to direct_post_url of a created Purchase. You will also need to saturat
 </thead><tbody>
 <tr>
 <td>1</td>
-<td>client</td>
-<td>object</td>
-<td>Client data</td>
+<td>client*</td>
+<td>array</td>
+<td>Array with Client data (required)</td>
 <td></td>
 </tr>
 <tr>
 <td>2</td>
-<td>email</td>
-<td>string</td>
-<td>Client email</td>
+<td>purchase*</td>
+<td>array</td>
+<td>Array with Purchase data (required)</td>
 <td></td>
 </tr>
 <tr>
 <td>3</td>
-<td>purchase</td>
-<td>object</td>
-<td>Purchase data</td>
+<td>send_receipt</td>
+<td>bool</td>
+<td>Whether to send receipt email for this Purchase when it&#39;s paid.</td>
 <td></td>
 </tr>
 <tr>
 <td>4</td>
-<td>name</td>
-<td>string</td>
-<td>Product name</td>
+<td>skip_capture</td>
+<td>float</td>
+<td>Card payment-specific: if set to true, only authorize the</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>payment (place funds on hold) when payer enters his card data</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>and pays. This option requires a POST /capture/ or POST</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>/release/ later on.</td>
 <td></td>
 </tr>
 <tr>
 <td>5</td>
-<td>price</td>
-<td>float</td>
-<td>Product price</td>
+<td>reference</td>
+<td>string</td>
+<td>Invoice reference.</td>
 <td></td>
 </tr>
 <tr>
 <td>6</td>
-<td>brand_id</td>
+<td>due</td>
+<td>time</td>
+<td>When the payment is due for this Purchase. The default</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>behaviour is to still allow payment once this moment passes.</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>To change that, set purchase.due_strict to true.</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>payment_method_whitelist</td>
+<td>array</td>
+<td>An optional whitelist of payment methods</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>success_redirect</td>
 <td>string</td>
-<td>Brand ID in our system</td>
+<td>When Purchase is paid for successfully, your customer will be</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>taken to this link. Otherwise a standard screen will be</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>displayed. (maxLength: 500)</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>failure_redirect</td>
+<td>string</td>
+<td>If there&#39;s a payment failure for this Purchase, your customer</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>will be taken to this link. Otherwise a standard screen will</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>be displayed. (maxLength: 500)</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>cancel_redirect</td>
+<td>string</td>
+<td>If you provide this link, customer will have an option to go</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>to it instead of making payment (a button with &#39;Return to</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>seller&#39; text will be displayed). Can&#39;t contain any of the</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>following symbols: &lt;&gt;&#39;&quot;. (maxLength: 500)</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>success_callback</td>
+<td>string</td>
+<td>When Purchase is paid for successfully, the success_callback</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>URL will receive a POST request with the Purchase object&#39;s</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>data in body. (maxLength: 500)</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>creator_agent</td>
+<td>string</td>
+<td>Identification of software (e.g. an ecommerce module and</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>version) used to create this purchase, if any. (maxLength: 32)</td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td>platform</td>
+<td>enum</td>
+<td>Platform this Purchase was created on. Possible values is</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>[ web, api, ios, android, macos, windows ]</td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>market_id</td>
+<td>int</td>
+<td>ID of the brand to create this Purchase for. You can copy it</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>down in the API section, see the &quot;specify the ID of the Brand&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>link in answer to &quot;How to setup payments on website or in</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>mobile app?&quot;.</td>
 <td></td>
 </tr>
 </tbody></table>
