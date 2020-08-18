@@ -236,6 +236,12 @@
                     <a href="#request-body" class="toc-h2 toc-link" data-title="Request body">Request body</a>
                   </li>
                   <li>
+                    <a href="#client-array-structure" class="toc-h2 toc-link" data-title="Client array structure">Client array structure</a>
+                  </li>
+                  <li>
+                    <a href="#purchase-array-structure" class="toc-h2 toc-link" data-title="Purchase array structure">Purchase array structure</a>
+                  </li>
+                  <li>
                     <a href="#responses" class="toc-h2 toc-link" data-title="Responses">Responses</a>
                   </li>
                   <li>
@@ -483,6 +489,275 @@ pointing to direct_post_url of a created Purchase. You will also need to saturat
 <td></td>
 </tr>
 </tbody></table>
+<h2 id='client-array-structure'>Client array structure</h2>
+<table><thead>
+<tr>
+<th>№</th>
+<th>Parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>email*</td>
+<td>string</td>
+<td>Email address (required,maxLength: 254)</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>phone</td>
+<td>string</td>
+<td>Phone number in the <country_code> <number> format (maxLength: 32)</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>full_name</td>
+<td>string</td>
+<td>Name and surname of client (maxLength: 128)</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>personal_code</td>
+<td>string</td>
+<td>Personal identification code of client (maxLength: 32)</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>legal_name</td>
+<td>string</td>
+<td>Legal name of company (maxLength: 128)</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>brand_name</td>
+<td>string</td>
+<td>Company brand name (maxLength: 128)</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>registration_number</td>
+<td>string</td>
+<td>Registration number of company (maxLength: 32)</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>tax_number</td>
+<td>string</td>
+<td>Tax payer registration number (maxLength: 32)</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>bank_account</td>
+<td>string</td>
+<td>Bank account number (e.g. IBAN) (maxLength: 34)</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>bank_code</td>
+<td>string</td>
+<td>SWIFT/BIC code of the bank (maxLength: 11)</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>street_address</td>
+<td>string</td>
+<td>Street house number and flat address where applicable (maxLength: 128)</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>city</td>
+<td>string</td>
+<td>City name (maxLength: 128)</td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td>zip_code</td>
+<td>string</td>
+<td>ZIP or postal code (maxLength: 32)</td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>country</td>
+<td>string</td>
+<td>Country code in the ISO 3166-1 alpha-2 format (e.g. &#39;GB&#39;) (maxLength: 2)</td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>shipping_street_address</td>
+<td>string</td>
+<td>Street house number and flat address where applicable (maxLength: 128)</td>
+<td></td>
+</tr>
+<tr>
+<td>16</td>
+<td>shipping_city</td>
+<td>string</td>
+<td>City name (maxLength: 128)</td>
+<td></td>
+</tr>
+<tr>
+<td>17</td>
+<td>shipping_zip_code</td>
+<td>string</td>
+<td>ZIP or postal code (maxLength: 32)</td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>shipping_country</td>
+<td>string</td>
+<td>Country code in the ISO 3166-1 alpha-2 format (e.g. &#39;GB&#39;) (maxLength: 2)</td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>cc</td>
+<td>array</td>
+<td>Email addresses to receive a carbon copy of all notification emails</td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>bcc</td>
+<td>array</td>
+<td>Email addresses to receive a blind carbon copy of all notification emails</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='purchase-array-structure'>Purchase array structure</h2>
+<table><thead>
+<tr>
+<th>№</th>
+<th>Parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>currency</td>
+<td>string</td>
+<td>Currency code in the ISO 4217 standard (e.g. &#39;EUR&#39;).(maxLength: 3)</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>products*</td>
+<td>array</td>
+<td>Line items of the invoice. In case of a transaction with no invoice sent, specify a single Product forming the cost of transaction.</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>language</td>
+<td>string</td>
+<td>Language code in the ISO 639-1 format (e.g. &#39;en&#39;,maxLength: 2)</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>notes</td>
+<td>string</td>
+<td>Invoice notes. (maxLength: 1000)</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>debt</td>
+<td>int</td>
+<td>Will be added/substracted to the invoice total, if present.</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>subtotal_override</td>
+<td>int</td>
+<td>If specified and not null, will override the grand subtotal. This field is visual-only, setting it won&#39;t impact <code>total</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>total_tax_override</td>
+<td>int</td>
+<td>If specified and not null, will override the total tax. This field is visual-only, setting it won&#39;t impact <code>total</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>total_discount_override</td>
+<td>int</td>
+<td>If specified and not null, will override the total discount. This field is visual-only, setting it won&#39;t impact <code>total</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>total_override</td>
+<td>int</td>
+<td>If specified and not null, will override the total (unlike the rest of <code>total_*_override</code> fields). You can use this field or <code>products[].total</code> with a value of 0 to activate preauthorization scenario. See the description of the <code>Purchase.skip_capture</code> field.</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>total</td>
+<td>int</td>
+<td>Calculated from <code>products</code>. You don&#39;t need to specify it.</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>request_client_details</td>
+<td>array</td>
+<td>ClientDetails fields to request from the client before the payment. If a value is passed for a field in ClientDetails, it will be automatically removed from this list. [ email, phone, full_name, personal_code, brand_name, legal_name, registration_number, tax_number, country, city, street_address, zip_code, bank_account, bank_code, shipping_country, shipping_city, shipping_street_address, shipping_zip_code ]</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>timezone</td>
+<td>string</td>
+<td>Timezone to localize invoice-specific timestamps in, e.g. to display a concrete date for a due timestamp on the invoice.</td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td>due_strict</td>
+<td>bool</td>
+<td>Whether to permit payments when Purchase&#39;s due has passed. By default those are permitted (and status will be set to overdue once due moment is passed). If this is set to true, it won&#39;t be possible to pay for an overdue invoice, and when due is passed the Purchase&#39;s status will be set to expired.</td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>email_message</td>
+<td>string</td>
+<td>An optional message to display to your customer in invoice email, e.g. &quot;Your invoice for June&quot;. (maxLength: 256)</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='purchase-products-array-structure'>Purchase PRoducts array structure</h3>
+<p>&quot;products&quot;:[
+        {&quot;name&quot;:&quot;test&quot;,
+        &quot;price&quot;:100,
+        &quot;quantity&quot;:&quot;1.0000&quot;,
+        &quot;discount&quot;:0,
+        &quot;tax_percent&quot;:&quot;0.00&quot;
+        }
+    ],</p>
 <h2 id='responses'>Responses</h2>
 <table><thead>
 <tr>
