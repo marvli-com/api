@@ -409,28 +409,7 @@ pointing to direct_post_url of a created Purchase. You will also need to saturat
 <td>4</td>
 <td>skip_capture</td>
 <td>float</td>
-<td>Card payment-specific: if set to true, only authorize the</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>payment (place funds on hold) when payer enters his card data</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>and pays. This option requires a POST /capture/ or POST</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>/release/ later on.</td>
+<td>Card payment-specific: if set to true, only authorize the payment (place funds on hold) when payer enters his card data and pays. This option requires a POST /capture/ or POST /release/ later on.</td>
 <td></td>
 </tr>
 <tr>
@@ -444,21 +423,7 @@ pointing to direct_post_url of a created Purchase. You will also need to saturat
 <td>6</td>
 <td>due</td>
 <td>time</td>
-<td>When the payment is due for this Purchase. The default</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>behaviour is to still allow payment once this moment passes.</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>To change that, set purchase.due_strict to true.</td>
+<td>When the payment is due for this Purchase. The default behaviour is to still allow payment once this moment passes. To change that, set purchase.due_strict to true.</td>
 <td></td>
 </tr>
 <tr>
@@ -472,147 +437,49 @@ pointing to direct_post_url of a created Purchase. You will also need to saturat
 <td>8</td>
 <td>success_redirect</td>
 <td>string</td>
-<td>When Purchase is paid for successfully, your customer will be</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>taken to this link. Otherwise a standard screen will be</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>displayed. (maxLength: 500)</td>
+<td>When Purchase is paid for successfully, your customer will be taken to this link. Otherwise a standard screen will be displayed. (maxLength: 500)</td>
 <td></td>
 </tr>
 <tr>
 <td>9</td>
 <td>failure_redirect</td>
 <td>string</td>
-<td>If there&#39;s a payment failure for this Purchase, your customer</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>will be taken to this link. Otherwise a standard screen will</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>be displayed. (maxLength: 500)</td>
+<td>If there&#39;s a payment failure for this Purchase, your customer will be taken to this link. Otherwise a standard screen will be displayed. (maxLength: 500)</td>
 <td></td>
 </tr>
 <tr>
 <td>10</td>
 <td>cancel_redirect</td>
 <td>string</td>
-<td>If you provide this link, customer will have an option to go</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>to it instead of making payment (a button with &#39;Return to</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>seller&#39; text will be displayed). Can&#39;t contain any of the</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>following symbols: &lt;&gt;&#39;&quot;. (maxLength: 500)</td>
+<td>If you provide this link, customer will have an option to go to it instead of making payment (a button with &#39;Return to seller&#39; text will be displayed). Can&#39;t contain any of the following symbols: &lt;&gt;&#39;&quot;. (maxLength: 500)</td>
 <td></td>
 </tr>
 <tr>
 <td>11</td>
 <td>success_callback</td>
 <td>string</td>
-<td>When Purchase is paid for successfully, the success_callback</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>URL will receive a POST request with the Purchase object&#39;s</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>data in body. (maxLength: 500)</td>
+<td>When Purchase is paid for successfully, the success_callback URL will receive a POST request with the Purchase object&#39;s data in body. (maxLength: 500)</td>
 <td></td>
 </tr>
 <tr>
 <td>12</td>
 <td>creator_agent</td>
 <td>string</td>
-<td>Identification of software (e.g. an ecommerce module and</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>version) used to create this purchase, if any. (maxLength: 32)</td>
+<td>Identification of software (e.g. an ecommerce module and version) used to create this purchase, if any. (maxLength: 32)</td>
 <td></td>
 </tr>
 <tr>
 <td>13</td>
 <td>platform</td>
 <td>enum</td>
-<td>Platform this Purchase was created on. Possible values is</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>[ web, api, ios, android, macos, windows ]</td>
+<td>Platform this Purchase was created on. Possible values is [ web, api, ios, android, macos, windows ]</td>
 <td></td>
 </tr>
 <tr>
 <td>14</td>
 <td>market_id</td>
 <td>int</td>
-<td>ID of the brand to create this Purchase for. You can copy it</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>down in the API section, see the &quot;specify the ID of the Brand&quot;</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>link in answer to &quot;How to setup payments on website or in</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>mobile app?&quot;.</td>
+<td>ID of the brand to create this Purchase for. You can copy it down in the API section, see the &quot;specify the ID of the Brand&quot; link in answer to &quot;How to setup payments on website or in mobile app?&quot;.</td>
 <td></td>
 </tr>
 </tbody></table>
