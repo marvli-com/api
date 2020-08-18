@@ -1,0 +1,1522 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Public REST API</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen-0a7c4629.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-c427a123.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch-c275c2f6.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;curl examples&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-8a9c052f.png" class="logo" alt="" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="curl examples">curl examples</a>
+        </div>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#public-rest-api" class="toc-h1 toc-link" data-title="Public REST API">Public REST API</a>
+          </li>
+          <li>
+            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+          </li>
+          <li>
+            <a href="#delivery-protocol" class="toc-h1 toc-link" data-title="Delivery protocol">Delivery protocol</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#purchases" class="toc-h1 toc-link" data-title="Purchases">Purchases</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#purchases-create-a-purchase-the-main-request-for-any-e-commerce-integration" class="toc-h2 toc-link" data-title="/purchases/ Create a Purchase. The main request for any e-commerce integration.">/purchases/ Create a Purchase. The main request for any e-commerce integration.</a>
+                  </li>
+                  <li>
+                    <a href="#request-body" class="toc-h2 toc-link" data-title="Request body">Request body</a>
+                  </li>
+                  <li>
+                    <a href="#responses" class="toc-h2 toc-link" data-title="Responses">Responses</a>
+                  </li>
+                  <li>
+                    <a href="#success-response" class="toc-h2 toc-link" data-title="Success Response">Success Response</a>
+                  </li>
+                  <li>
+                    <a href="#error-response" class="toc-h2 toc-link" data-title="Error Response">Error Response</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://merch.transcoin.me'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='public-rest-api'>Public REST API</h1>
+<p>All the endpoints below have a prefix of https://cabinet.marvli.com/api/market/v1/ ( e.g. https://cabinet.marvli.com/api/market/v1/new_payment)</p>
+
+<p>You will need your API secret key that you can obtain in API section of your company profile. Use it as a bearer token 
+in <code>Authorization</code> header included with every request: <code>Authorization:</code> <code>Bearer &lt;secret key&gt;</code></p>
+<h1 id='webhooks'>Webhooks</h1>
+<p>For creating and modifying webhooks see the Webhook <a href='https://github.com/slatedocs/slate'>CRUD API specification.</a>CRUD API specification.</p>
+
+<p>Webhook callback payloads of each individual Webhook are signed using a dedicated key pair. The public key can be retrieved from Webhook.public_key. 
+See Authentication below for more details.</p>
+<h1 id='delivery-protocol'>Delivery protocol</h1>
+<p>In case a callback is not successfully delivered (received by the target server and responded to with a 200 series HTTP response code) further 
+attempts will be made to deliver the callback, up to a total of 8 attempts, at exponentially increasing intervals between attempts. If the callback
+ is not successfully delivered 36 hours after triggering, no further delivery attempts will be made.</p>
+
+<p>Please note that due to the asynchronous nature of network requests it is possible for a callback delivery confirmation (HTTP response with a 200 series
+ status code) to not properly arrive from the callback&#39;s target server. Therefore it is possible in case of severe network faults for the target server
+ to receive a callback, respond to it with a 200 series HTTP status code and then receive the same callback after an interval.</p>
+
+<p>Callback deliveries are guaranteed to be sequential in relation to events triggered on their source objects. For example, if webhooks have been registered
+ for both the purchase.created and purchase.paid events, no purchase.paid callbacks for this Purchase will be delivered until all purchase.created 
+ callbacks for this Purchase have been successfully delivered.</p>
+<h1 id='authentication'>Authentication</h1>
+<p>To guarantee the authenticity of delivered callbacks payloads are signed using asymmetric A.K.A. public-key cryptography. Each callback delivery 
+request includes an X-Signature header field. This field contains a base64-encoded RSA PKCS#1 v1.5 signature of the SHA3-256 digest of the 
+request body buffer.</p>
+
+<p>The public key for authenticating a Webhooks is available on Webhook.public_key of the corresponding Webhook.
+The public key for authenticating success callbacks can be retrieved with GET /public_key/.
+Please note the Gateway provider is not responsible for any financial loses incurred due to not implementing payload signature verification.</p>
+<h1 id='purchases'>Purchases</h1><h2 id='purchases-create-a-purchase-the-main-request-for-any-e-commerce-integration'>/purchases/ Create a Purchase. The main request for any e-commerce integration.</h2>
+<p>To run payments in your application use POST /purchases/, request to register payments and receive the checkout link (checkout_url). 
+After the payment is processed, gateway will redirect the client back to your website (take note of success_redirect, failure_redirect).</p>
+
+<p>You have three options to check payment status: 1) use success_calback parameter of Purchase object; 2) use GET /purchases/<purchase_id>/ request; 3)
+ set up a Webhook using the UI or Webhook API to listen to purchase.paid or purchase.payment_failure event on your server.</p>
+
+<p>Using skip_capture flag allows you to separate the authentication and payment execution steps, allowing you to reserve funds on payer’s card 
+account for some time. This flag can also enable preauthorization capability, allowing you to save the card without a financial transaction, if available.</p>
+
+<p>In case making a purchase client agrees to store his card for the upcoming purchases, next time he will be able to pay in a single click.</p>
+
+<p>Instead of a redirect you can also utilize Direct Post checkout: you can create an HTML <code>&lt;form&gt;</code> on your website with method=&quot;POST&quot; and action 
+pointing to direct_post_url of a created Purchase. You will also need to saturate form with <code>&lt;input&gt;</code>-s for card data fields. As a result, when
+ a payer submits their card data, it will be posted straight to our system, allowing you to customize the checkout as you wish while your PCI 
+ DSS requirement is only raised to SAQ A-EP, as your system doesn&#39;t receive or process card data. For more details, see the documentation on 
+ Purchase&#39;s direct_post_url field.</p>
+
+<p>To pay for test Purchases, use 4444 3333 2222 1111 as the card number, 123 as CVC, any date/month greater than now as expiry and any (Latin)
+ cardholder name. Any other card number/CVC/expiry not greater or equal than the current month will all fail a test payment.</p>
+
+<p>Method has no parameters</p>
+<h2 id='request-body'>Request body</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">client</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test@test.com</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">purchase</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">products</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">price</span><span class="dl">"</span><span class="p">:</span> <span class="mi">100</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">brand_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">409eb80e-3782-4b1d-afa8-b779759266a5</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>№</th>
+<th>Parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>client</td>
+<td>object</td>
+<td>Client data</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>email</td>
+<td>string</td>
+<td>Client email</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>purchase</td>
+<td>object</td>
+<td>Purchase data</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>name</td>
+<td>string</td>
+<td>Product name</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>price</td>
+<td>float</td>
+<td>Product price</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>brand_id</td>
+<td>string</td>
+<td>Brand ID in our system</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='responses'>Responses</h2>
+<table><thead>
+<tr>
+<th>№</th>
+<th>Code</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>201</td>
+<td>OK</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>400</td>
+<td>Invalid data submitted or request processing error</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='success-response'>Success Response</h2>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3fa85f64-5717-4562-b3fc-2c963f66afa6</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">created_on</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1619740800</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">updated_on</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1619740800</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">client</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">bank_account</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">bank_code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">user@example.com</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">phone</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">+44 45643564564</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">full_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">personal_code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">street_address</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">country</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">city</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">zip_code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">shipping_street_address</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">shipping_country</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">shipping_city</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">shipping_zip_code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">cc</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">"</span><span class="s2">user@example.com</span><span class="dl">"</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">bcc</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">"</span><span class="s2">user@example.com</span><span class="dl">"</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">legal_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">brand_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">registration_number</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">tax_number</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">purchase</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">currency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">products</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">quantity</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">price</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">discount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">tax_percent</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">total</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">language</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">notes</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">debt</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">subtotal_override</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">total_tax_override</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">total_discount_override</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">total_override</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">request_client_details</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">timezone</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Europe/Oslo</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">due_strict</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">email_message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">payment</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">is_outgoing</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">payment_type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">purchase</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">currency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">net_amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">fee_amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">pending_amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">pending_unfreeze_on</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1619740800</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">paid_on</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1619740800</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">remote_paid_on</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1619740800</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">issuer_details</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">website</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">legal_street_address</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">legal_country</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">legal_city</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">legal_zip_code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">bank_accounts</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">bank_account</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">bank_code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">legal_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">brand_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">registration_number</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">tax_number</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">transaction_data</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">payment_method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">extra</span><span class="dl">"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="dl">"</span><span class="s2">country</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">attempts</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">execute</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">successful</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">payment_method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">extra</span><span class="dl">"</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="dl">"</span><span class="s2">country</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">client_ip</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">processing_time</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1619740800</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+          <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">status</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">created</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">status_history</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">status</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">created</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1619740800</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">related_object</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3fa85f64-5717-4562-b3fc-2c963f66afa6</span><span class="dl">"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">viewed_on</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1619740800</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">company_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3fa85f64-5717-4562-b3fc-2c963f66afa6</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">is_test</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">user_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3fa85f64-5717-4562-b3fc-2c963f66afa6</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">brand_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3fa85f64-5717-4562-b3fc-2c963f66afa6</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">billing_template_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3fa85f64-5717-4562-b3fc-2c963f66afa6</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">client_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3fa85f64-5717-4562-b3fc-2c963f66afa6</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">send_receipt</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">is_recurring_token</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">recurring_token</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3fa85f64-5717-4562-b3fc-2c963f66afa6</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">skip_capture</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">reference_generated</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">reference</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">issued</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2020-04-30</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">due</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1619740800</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">refund_availability</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">all</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">refundable_amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">currency_conversion</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">original_currency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">original_amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">exchange_rate</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">payment_method_whitelist</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">success_redirect</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">failure_redirect</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">cancel_redirect</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">success_callback</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">creator_agent</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">platform</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">web</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">product</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">purchases</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">created_from_ip</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">invoice_url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">checkout_url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">direct_post_url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>№</th>
+<th>Parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>type</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>id</td>
+<td>string</td>
+<td>Client email</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>created_on</td>
+<td>time</td>
+<td>Creation date</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>updated_on</td>
+<td>time</td>
+<td>UPdate date</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>bank_account</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>bank_code</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>email</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>phone</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>full_name</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>personal_code</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>street_address</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>country</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>city</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>zip_code</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>shipping_street_address</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>shipping_country</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>shipping_city</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>shipping_zip_code</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>cc</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>bcc</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>legal_name</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>brand_name</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>registration_number</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>tax_number</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>purchase</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>currency</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>products</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>name</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>quantity</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>price</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>discount</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>tax_percent</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>total</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>language</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>notes</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>debt</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>subtotal_override</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>total_tax_override</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>total_discount_override</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>total_override</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>total_override</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>total_override</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>total_override</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>total_override</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>request_client_details</td>
+<td>array</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>timezone</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>due_strict</td>
+<td>bool</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>email_message</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>payment</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>is_outgoing</td>
+<td>bool</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>payment_type</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>amount</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>currency</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>net_amount</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>fee_amount</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>pending_amount</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>pending_unfreeze_on</td>
+<td>time</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>description</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>paid_on</td>
+<td>time</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>remote_paid_on</td>
+<td>time</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>issuer_details</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>website</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>legal_street_address</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>legal_country</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>legal_city</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>legal_zip_code</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>bank_accounts</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>bank_account</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>bank_code</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>legal_name</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>brand_name</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>registration_number</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>tax_number</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>transaction_data</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>payment_method</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>extra</td>
+<td>array`</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>country</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>attempts</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>type</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>successful</td>
+<td>bool</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>payment_method</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>extra</td>
+<td>bool</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>country</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>client_ip</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>processing_time</td>
+<td>time</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>error</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>code</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>message</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>status</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>status_history</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>status</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>timestamp</td>
+<td>time</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>related_object</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>type</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>id</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>viewed_on</td>
+<td>time</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>company_id</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>is_test</td>
+<td>bool</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>user_id</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>brand_id</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>billing_template_id</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>client_id</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>send_receipt</td>
+<td>bool</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>is_recurring_token</td>
+<td>bool</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>recurring_token</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>skip_capture</td>
+<td>bool</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>reference_generated</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>reference</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>issued</td>
+<td>date</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>due</td>
+<td>time</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>refund_availability</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>refundable_amount</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>currency_conversion</td>
+<td>object</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>original_currency</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>original_amount</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>exchange_rate</td>
+<td>float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>success_redirect</td>
+<td>array</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>failure_redirect</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>cancel_redirect</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>success_callback</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>creator_agent</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>platform</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>product</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>created_from_ip</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>invoice_url</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>checkout_url</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>direct_post_url</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='error-response'>Error Response</h2>
+<blockquote>
+<p>Error Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">__all__</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">descriptive error message</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error_code</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>№</th>
+<th>Parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>&quot;<strong>all</strong>&quot;</td>
+<td>object</td>
+<td>Object whitch stores error data</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>code</td>
+<td>int</td>
+<td>Error Code</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>message</td>
+<td>string</td>
+<td>Error message</td>
+<td></td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="curl examples">curl examples</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
