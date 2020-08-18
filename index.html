@@ -236,12 +236,6 @@
                     <a href="#request-body" class="toc-h2 toc-link" data-title="Request body">Request body</a>
                   </li>
                   <li>
-                    <a href="#client-array-structure" class="toc-h2 toc-link" data-title="Client array structure">Client array structure</a>
-                  </li>
-                  <li>
-                    <a href="#purchase-array-structure" class="toc-h2 toc-link" data-title="Purchase array structure">Purchase array structure</a>
-                  </li>
-                  <li>
                     <a href="#responses" class="toc-h2 toc-link" data-title="Responses">Responses</a>
                   </li>
                   <li>
@@ -489,7 +483,7 @@ pointing to direct_post_url of a created Purchase. You will also need to saturat
 <td></td>
 </tr>
 </tbody></table>
-<h2 id='client-array-structure'>Client array structure</h2>
+<h3 id='client-array-structure'>Client array structure</h3>
 <table><thead>
 <tr>
 <th>№</th>
@@ -640,7 +634,7 @@ pointing to direct_post_url of a created Purchase. You will also need to saturat
 <td></td>
 </tr>
 </tbody></table>
-<h2 id='purchase-array-structure'>Purchase array structure</h2>
+<h3 id='purchase-array-structure'>Purchase array structure</h3>
 <table><thead>
 <tr>
 <th>№</th>
@@ -749,15 +743,54 @@ pointing to direct_post_url of a created Purchase. You will also need to saturat
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='purchase-products-array-structure'>Purchase PRoducts array structure</h3>
-<p>&quot;products&quot;:[
-        {&quot;name&quot;:&quot;test&quot;,
-        &quot;price&quot;:100,
-        &quot;quantity&quot;:&quot;1.0000&quot;,
-        &quot;discount&quot;:0,
-        &quot;tax_percent&quot;:&quot;0.00&quot;
-        }
-    ],</p>
+<h4 id='purchase-products-array-structure'>Purchase Products array structure</h4>
+<p>Line items of the invoice. In case of a transaction with no invoice sent, specify a single Product forming the cost of transaction.</p>
+
+<table><thead>
+<tr>
+<th>№</th>
+<th>Parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>name*</td>
+<td>string</td>
+<td>Product name (maxLength: 256)</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>price*</td>
+<td>int</td>
+<td>You can use this field or total_override with a value of 0 to activate preauthorization scenario. See the description of the Purchase.skip_capture field.</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>quantity</td>
+<td>float</td>
+<td>Quantity of these products in invoice</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>discount</td>
+<td>int</td>
+<td>Total discount per this product in invoice</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>tax_percent</td>
+<td>float</td>
+<td>Percent of tax added to the price of this product</td>
+<td></td>
+</tr>
+</tbody></table>
 <h2 id='responses'>Responses</h2>
 <table><thead>
 <tr>
