@@ -65,45 +65,159 @@ Method has no parameters
 
 ## Request body
 
-
 > Request body
  
 ```javascript
-{
+curl --location --request POST 'https://cabinet.marvli.com/api/market/v1/new_payment' \
+--header 'Authorization: Bearer 1_12cb0ab9695a4f09fd74d61c659d3c87' \
+--header 'Content-Type: application/json' \
+--data-raw {
   "client": {
-    "email": "test@test.com"
+    "email":"<client email>",
+    "phone":"",
+    "full_name":"",
+    "personal_code":"",
+    "legal_name":"",
+    "brand_name":"",
+    "registration_number":"",
+    "tax_number":"",
+    "bank_account":"",
+    "bank_code":"",
+    "street_address":"",
+    "city":"",
+    "zip_code":"",
+    "country":"",
+    "shipping_street_address":"",
+    "shipping_city":"",
+    "shipping_zip_code":"",
+    "shipping_country":"",
+    "cc":[],
+    "bcc":[]
   },
-  "purchase": {
-    "products": [
-      {
-        "name": "test",
-        "price": 100
-      }
-    ]
+  "purchase":   {
+    "currency":"EUR",
+    "products":[
+        {"name":"test",
+        "price":100,
+        "quantity":"1.0000",
+        "discount":0,
+        "tax_percent":"0.00"
+        }
+    ],
+    "language":"en",
+    "notes":"",
+    "debt":0,
+    "subtotal_override":null,
+    "total_tax_override":null,
+    "total_discount_override":null,
+    "total_override":null,
+    "total":100,
+    "request_client_details":[],
+    "timezone":"Europe/Riga",
+    "due_strict":false,
+    "email_message":"",
+    "shipping_options":[]
   },
-  "brand_id": "409eb80e-3782-4b1d-afa8-b779759266a5"
+  "send_receipt":false,
+  "skip_capture":false,
+  "reference":"",
+  "due":1597737053,
+  "payment_method_whitelist":null,
+  "success_redirect":"<your success url>",
+  "failure_redirect":"<your failture url>",
+  "cancel_redirect":"",
+  "success_callback":"",
+  "creator_agent":"",
+  "platform":"api",
+  "market_id": "5"
 }
 ```
 
 >
 
-| № | Parameter name | Type   | Description                                           |   |
-|---|----------------|--------|-------------------------------------------------------|---|
-| 1 | client         | object | Client data                                           |   |
-| 2 | email          | string | Client email                                          |   |
-| 3 | purchase       | object | Purchase data                                         |   |
-| 4 | name           | string | Product name                                          |   |
-| 5 | price          | float  | Product price                                         |   |
-| 6 | brand_id       | string | Brand ID in our system                                |   |
+| № | Parameter name          | Type   | Description                                                    |   |
+|---|-------------------------|--------|----------------------------------------------------------------|---|
+| 1 | client*                 | object | Object with Client data (required)                             |   |
+| 2 | purchase*               | object | Object with Purchase data (required)                           |   |
+| 3 | send_receipt            | bool   | Whether to send receipt email for this Purchase when it's paid.|   |
+| 4 | skip_capture            | float  | Card payment-specific: if set to true, only authorize the payment (place funds on hold) when payer enters his card data and pays. This option requires a POST /capture/ or POST /release/ later on.                                            |   |
+| 5 | reference               | string | Invoice reference.                                             |   |
+| 6 | due                     | int    | When the payment is due for this Purchase. The default behaviour is to still allow payment once this moment passes. To change that, set purchase.due_strict to true.               |   |
+| 7 | payment_method_whitelist| object | An optional whitelist of payment methods                       |   |
+| 8 | success_redirect        | string | When Purchase is paid for successfully, your customer will be taken to this link. Otherwise a standard screen will be displayed. (maxLength: 500)                                    |   |
+| 9 | failure_redirect        | string | If there's a payment failure for this Purchase, your customer will be taken to this link. Otherwise a standard screen will be displayed. (maxLength: 500)                                 |   |
+|10 | cancel_redirect         | string | If you provide this link, customer will have an option to go to it instead of making payment (a button with 'Return to seller' text will be displayed). Can't contain any of the following symbols: <>'". (maxLength: 500) |   |
+|11 | success_callback        | string | When Purchase is paid for successfully, the success_callback URL will receive a POST request with the Purchase object's data in body. (maxLength: 500)                                 |   |
+|12 | creator_agent           | string | Identification of software (e.g. an ecommerce module and version) used to create this purchase, if any. (maxLength: 32) |   |
+|13 | platform                | enum   | Platform this Purchase was created on. Possible values is [ web, api, ios, android, macos, windows ]                     |   |
+|14 | market_id               | int    | ID of the brand to create this Purchase for. You can copy it down in the API section, see the "specify the ID of the Brand" link in answer to "How to setup payments on website or in mobile app?".                                                  |   |
+
+### Client object structure
+
+Contains customer data
+
+| № | Parameter name          | Type   | Description                                                    |   |
+|---|-------------------------|--------|----------------------------------------------------------------|---|
+| 1 | email*                  | string | Email address (required,maxLength: 254)                        |   |
+| 2 | phone                   | string | Phone number in the <country_code> <number> format (maxLength: 32)|   |
+| 3 | full_name               | string | Name and surname of client (maxLength: 128)                    |   |
+| 4 | personal_code           | string | Personal identification code of client (maxLength: 32)         |   |
+| 5 | legal_name              | string | Legal name of company (maxLength: 128)                         |   |
+| 6 | brand_name              | string | Company brand name (maxLength: 128)                            |   |
+| 7 | registration_number     | string | Registration number of company (maxLength: 32)                 |   |
+| 8 | tax_number              | string | Tax payer registration number (maxLength: 32)                  |   |
+| 9 | bank_account            | string | Bank account number (e.g. IBAN) (maxLength: 34)                |   |
+|10 | bank_code               | string | SWIFT/BIC code of the bank (maxLength: 11)                     |   |
+|11 | street_address          | string | Street house number and flat address where applicable (maxLength: 128)|   |
+|12 | city                    | string | City name (maxLength: 128)                                     |   |
+|13 | zip_code                | string | ZIP or postal code (maxLength: 32)                             |   |
+|14 | country                 | string | Country code in the ISO 3166-1 alpha-2 format (e.g. 'GB') (maxLength: 2)|   |
+|15 | shipping_street_address | string | Street house number and flat address where applicable (maxLength: 128)|   |
+|16 | shipping_city           | string | City name (maxLength: 128)                                     |   |
+|17 | shipping_zip_code       | string | ZIP or postal code (maxLength: 32)                             |   |
+|18 | shipping_country        | string | Country code in the ISO 3166-1 alpha-2 format (e.g. 'GB') (maxLength: 2)|   |
+|18 | cc                      | object | Email addresses to receive a carbon copy of all notification emails |   |
+|18 | bcc                     | object | Email addresses to receive a blind carbon copy of all notification emails |   |
+
+### Purchase object structure
+
+Core information about the Purchase, including the products, total, currency and invoice fields. If you're using invoicing via /billing/ or /billing_templates/, this object will be copied 1:1 from BillingTemplate you specify to the resulting Purchases (also to subscription Purchases).
+
+| № | Parameter name          | Type   | Description                                                    |   |
+|---|-------------------------|--------|----------------------------------------------------------------|---|
+| 1 | currency                | string | Currency code in the ISO 4217 standard (e.g. 'EUR').(maxLength: 3)|   |
+| 2 | products*               | object | Line items of the invoice. In case of a transaction with no invoice sent, specify a single Product forming the cost of transaction.|   |
+| 3 | language                | string | Language code in the ISO 639-1 format (e.g. 'en',maxLength: 2) |   |
+| 4 | notes                   | string | Invoice notes. (maxLength: 1000)                               |   |
+| 5 | debt                    | int    | Will be added/substracted to the invoice total, if present.    |   |
+| 6 | subtotal_override       | int    | If specified and not null, will override the grand subtotal. This field is visual-only, setting it won't impact `total`.|   |
+| 7 | total_tax_override      | int    | If specified and not null, will override the total tax. This field is visual-only, setting it won't impact `total`.|   |
+| 8 | total_discount_override | int    | If specified and not null, will override the total discount. This field is visual-only, setting it won't impact `total`.|   |
+| 9 | total_override          | int    | If specified and not null, will override the total (unlike the rest of `total_*_override` fields). You can use this field or `products[].total` with a value of 0 to activate preauthorization scenario. See the description of the `Purchase.skip_capture` field.|   |
+|10 | total                   | int    | Calculated from `products`. You don't need to specify it.      |   |
+|11 | request_client_details  | object | ClientDetails fields to request from the client before the payment. If a value is passed for a field in ClientDetails, it will be automatically removed from this list. [ email, phone, full_name, personal_code, brand_name, legal_name, registration_number, tax_number, country, city, street_address, zip_code, bank_account, bank_code, shipping_country, shipping_city, shipping_street_address, shipping_zip_code ]|   |
+|12 | timezone                | string | Timezone to localize invoice-specific timestamps in, e.g. to display a concrete date for a due timestamp on the invoice.|   |
+|13 | due_strict              | bool   | Whether to permit payments when Purchase's due has passed. By default those are permitted (and status will be set to overdue once due moment is passed). If this is set to true, it won't be possible to pay for an overdue invoice, and when due is passed the Purchase's status will be set to expired. |   |
+|14 | email_message           | string | An optional message to display to your customer in invoice email, e.g. "Your invoice for June". (maxLength: 256)|   |
+
+### Purchase Products object structure	
+
+Line items of the invoice. In case of a transaction with no invoice sent, specify a single Product forming the cost of transaction.
+
+| № | Parameter name          | Type   | Description                                                    |   |
+|---|-------------------------|--------|----------------------------------------------------------------|---|
+| 1 | name*                   | string | Product name (maxLength: 256)                                  |   |
+| 2 | price*                  | int    | You can use this field or total_override with a value of 0 to activate preauthorization scenario. See the description of the Purchase.skip_capture field.|   |
+| 3 | quantity                | float  | Quantity of these products in invoice                          |   |
+| 4 | discount                | int    | Total discount per this product in invoice                     |   |
+| 5 | tax_percent             | float  | Percent of tax added to the price of this product              |   |
 
 ## Responses
 
-| № | Code | Description                                         |   |
-|---|------|-----------------------------------------------------|---|
-| 1 | 201  | OK                                                  |   |
-| 2 | 400  | Invalid data submitted or request processing error  |   |
+All fields listed above in the request body will also be included in the response. However, the answer will add additional parameters.
+These parameters are read-only, they are described in the table below.
 
-## Success Response
+### Success Response
 
 > Success Response
  
@@ -267,138 +381,160 @@ Method has no parameters
 
 >
 
-| № | Parameter name          | Type   | Description                   |   |
-|---|-------------------------|--------|-------------------------------|---|
-| 1 | type                    | string |                               |   |
-| 2 | id                      | string | Client email                  |   |
-| 3 | created_on              | time   | Creation date                 |   |
-| 4 | updated_on              | time   | UPdate date                   |   |
-| 6 | bank_account            | string |                               |   |
-| 6 | bank_code               | string |                               |   |
-| 6 | email                   | string |                               |   |
-| 6 | phone                   | string |                               |   |
-| 6 | full_name               | string |                               |   |
-| 6 | personal_code           | string |                               |   |
-| 6 | street_address          | string |                               |   |
-| 6 | country                 | string |                               |   |
-| 6 | city                    | string |                               |   |
-| 6 | zip_code                | string |                               |   |
-| 6 | shipping_street_address | string |                               |   |
-| 6 | shipping_country        | string |                               |   |
-| 6 | shipping_city           | string |                               |   |
-| 6 | shipping_zip_code       | string |                               |   |
-| 6 | cc                      | string |                               |   |
-| 6 | bcc                     | string |                               |   |
-| 6 | legal_name              | string |                               |   |
-| 6 | brand_name              | string |                               |   |
-| 6 | registration_number     | string |                               |   |
-| 6 | tax_number              | string |                               |   |
-| 6 | purchase                | object |                               |   |
-| 6 | currency                | string |                               |   |
-| 6 | products                | object |                               |   |
-| 6 | name                    | string |                               |   |
-| 6 | quantity                | string |                               |   |
-| 6 | price                   | float  |                               |   |
-| 6 | discount                | float  |                               |   |
-| 6 | tax_percent             | string |                               |   |
-| 6 | total                   | float  |                               |   |
-| 6 | language                | string |                               |   |
-| 6 | notes                   | string |                               |   |
-| 6 | debt                    | float  |                               |   |
-| 6 | subtotal_override       | float  |                               |   |
-| 6 | total_tax_override      | float  |                               |   |
-| 6 | total_discount_override | float  |                               |   |
-| 6 | total_override          | float  |                               |   |
-| 6 | total_override          | float  |                               |   |
-| 6 | total_override          | float  |                               |   |
-| 6 | total_override          | float  |                               |   |
-| 6 | total_override          | float  |                               |   |
-| 6 | request_client_details  | array  |                               |   |
-| 6 | timezone                | string |                               |   |
-| 6 | due_strict              | bool   |                               |   |
-| 6 | email_message           | string |                               |   |
-| 6 | payment                 | object |                               |   |
-| 6 | is_outgoing             | bool   |                               |   |
-| 6 | payment_type            | string |                               |   |
-| 6 | amount                  | float  |                               |   |
-| 6 | currency                | string |                               |   |
-| 6 | net_amount              | float  |                               |   |
-| 6 | fee_amount              | float  |                               |   |
-| 6 | pending_amount          | float  |                               |   |
-| 6 | pending_unfreeze_on     | time   |                               |   |
-| 6 | description             | string |                               |   |
-| 6 | paid_on                 | time   |                               |   |
-| 6 | remote_paid_on          | time   |                               |   |
-| 6 | issuer_details          | object |                               |   |
-| 6 | website                 | string |                               |   |
-| 6 | legal_street_address    | string |                               |   |
-| 6 | legal_country           | string |                               |   |
-| 6 | legal_city              | string |                               |   |
-| 6 | legal_zip_code          | string |                               |   |
-| 6 | bank_accounts           | object |                               |   |
-| 6 | bank_account            | string |                               |   |
-| 6 | bank_code               | string |                               |   |
-| 6 | legal_name              | string |                               |   |
-| 6 | brand_name              | string |                               |   |
-| 6 | registration_number     | string |                               |   |
-| 6 | tax_number              | string |                               |   |
-| 6 | transaction_data        | object |                               |   |
-| 6 | payment_method          | string |                               |   |
-| 6 | extra                   | array` |                               |   |
-| 6 | country                 | string |                               |   |
-| 6 | attempts                | object |                               |   |
-| 6 | type                    | string |                               |   |
-| 6 | successful              | bool   |                               |   |
-| 6 | payment_method          | string |                               |   |
-| 6 | extra                   | bool   |                               |   |
-| 6 | country                 | string |                               |   |
-| 6 | client_ip               | string |                               |   |
-| 6 | processing_time         | time   |                               |   |
-| 6 | error                   | object |                               |   |
-| 6 | code                    | string |                               |   |
-| 6 | message                 | string |                               |   |
-| 6 | status                  | string |                               |   |
-| 6 | status_history          | object |                               |   |
-| 6 | status                  | string |                               |   |
-| 6 | timestamp               | time   |                               |   |
-| 6 | related_object          | object |                               |   |
-| 6 | type                    | string |                               |   |
-| 6 | id                      | string |                               |   |
-| 6 | viewed_on               | time   |                               |   |
-| 6 | company_id              | string |                               |   |
-| 6 | is_test                 | bool   |                               |   |
-| 6 | user_id                 | string |                               |   |
-| 6 | brand_id                | string |                               |   |
-| 6 | billing_template_id     | string |                               |   |
-| 6 | client_id               | string |                               |   |
-| 6 | send_receipt            | bool   |                               |   |
-| 6 | is_recurring_token      | bool   |                               |   |
-| 6 | recurring_token         | string |                               |   |
-| 6 | skip_capture            | bool   |                               |   |
-| 6 | reference_generated     | string |                               |   |
-| 6 | reference               | string |                               |   |
-| 6 | issued                  | date   |                               |   |
-| 6 | due                     | time   |                               |   |
-| 6 | refund_availability     | string |                               |   |
-| 6 | refundable_amount       | float  |                               |   |
-| 6 | currency_conversion     | object |                               |   |
-| 6 | original_currency       | string |                               |   |
-| 6 | original_amount         | float  |                               |   |
-| 6 | exchange_rate           | float  |                               |   |
-| 6 | success_redirect        | array  |                               |   |
-| 6 | failure_redirect        | string |                               |   |
-| 6 | cancel_redirect         | string |                               |   |
-| 6 | success_callback        | string |                               |   |
-| 6 | creator_agent           | string |                               |   |
-| 6 | platform                | string |                               |   |
-| 6 | product                 | string |                               |   |
-| 6 | created_from_ip         | string |                               |   |
-| 6 | invoice_url             | string |                               |   |
-| 6 | checkout_url            | string |                               |   |
-| 6 | direct_post_url         | string |                               |   |
+| № | Parameter name          | Type   | Description                                         |   |
+|---|-------------------------|--------|-----------------------------------------------------|---|
+| 1 | type                    | string |  Object type identifier                             |   |
+| 2 | id                      | string | Request uid                                         |   |
+| 3 | created_on              | int    | Object creation time                                |   |
+| 4 | updated_on              | int    | Object last modification time                       |   |
+| 5 | payment                 | object | Details of an executed transaction. Read-only for Purchases and Payouts. For an unpaid Purchase, this object will be null. |   |
+| 6 | issuer_details          | object | Read-only details of issuer company/brand, persisted for invoice display. |   |
+| 7 | transaction_data        | object | Payment method-specific, read-only transaction data. Will contain information about all the transaction attempts and possible errors, if available. |   |
+| 8 | status                  | string | Purchase status. Can have the following values: [ created, sent, viewed, error, cancelled, overdue, expired, blocked, hold, released, preauthorized, paid, cleared, settled, chargeback, refunded ] |   |
+| 9 | status_history          | ozbject | History of status changes, latest last. Might contain entry about a related object, e.g. status change to refunded will contain a reference to the refund Payment. |   |
+|10 | viewed_on               | string | Time the payment form or invoice page was first viewed on |   |
+|11 | company_id              | string | Uid of cimpany                                      |   |
+|12 | is_test                 | bool   | Indicates this is a test object, created using test API keys or using Billing section of UI while in test mode. |   |
+|13 | user_id                 | string | ID of user who has created this object in the Billing UI, if applicable. |   |
+|14 | billing_template_id     | string | ID of a BillingTemplate that has spawned this Purchase, if any. |   |
+|15 | client_id               | string | ID of a Client object used to initialize ClientDetails (.client) of this Purchase. Either this field or specifying .client object is required (you can only specify a value for one of these fields). All ClientDetails fields from the Client will be copied to .client object. Note that editing Client object won't change the respective fields in already created Purchases. |   |
+|16 | is_recurring_token      | string | Indicates whether a recurring token (e.g. for card payments - card token) was saved for this Purchase. If this is true, the id of this Purchase can be used as a recurring_token in POST /purchases/{id}/charge/, enabling you to pay for that Purchase using the same method (same card for card payments) that this one was paid with. |   |
+|17 | recurring_token         | string | ID of a recurring token (Purchase having is_recurring_token == true) that was used to pay this Purchase, if any. |   |
+|18 | reference_generated     | string | If you don't provide an invoice reference yourself, this autogenerated value will be used as a reference instead. |   |
+|19 | refund_availability     | string | Specifies, if the purchase can be refunded fully and partially, only fully, partially or not at all: [ all, full_only, partial_only, none ]  |   |
+|20 | refundable_amount       | string | Amount available for refunds. Amount of money as the smallest indivisible units of the currency. Examples: 1 cent for EUR and 1 Yen for JPY. |   |
+|21 | currency_conversion     | object | This object is present when automatic currency conversion has occurred upon creation of the purchase. Purchase's original currency was changed and its original amount was converted using the exchange rate shown here. |   |
+|22 | product                 | string | Defines which gateway product was used to create this Purchase: [ purchases, billing_invoices, billing_subscriptions, billing_subscriptions_invoice ] |   |
+|23 | created_from_ip         | string | IP the Purchase was created from.                    |   |
+|24 | invoice_url             | string | URL you will be able to access invoice for this Purchase at, if applicable |   |
+|25 | checkout_url            | object | URL you will be able to access the checkout for this Purchase at, if payment for it is possible. When building integrations, redirect the customer to this URL once purchase is created. |   |
+|26 | direct_post_url         | string | URL that can be used for Direct Post integration.    |   |
 
+### Payment object structure
 
-## Error Response
+Details of an executed transaction. Read-only for Purchases and Payouts. For an unpaid Purchase, this object will be null.
+
+| № | Parameter name          | Type   | Description                                                                                           |   |
+|---|-------------------------|--------|-------------------------------------------------------------------------------------------------------|---|
+| 1 | is_outgoing             | bool   | Denotes the direction of payment, e.g. for a paid Purchase, is granted to be false, true for payouts. |   |
+| 2 | payment_type            | string | Can take the following values [ purchase, purchase_charge, payout, bank_payment, refund, custom ]     |   |
+| 3 | amount                  | int    | Amount of money as the smallest indivisible units of the currency. Examples: 1 cent for EUR and 1 Yen for JPY. |   |
+| 4 | currency                | string | Currency code in the ISO 4217 standard (e.g. 'EUR'). (maxLength: 3)                                   |   |
+| 5 | net_amount              | int    | Net amount of payment with all fees and pending amount subtracted. `amount` = `net_amount` + `fee_amount` + `pending_amount`. The respective account is credited or debited with this value. |   |
+| 6 | fee_amount              | int    | Amount of fees for this payment. For a Purchase's PurchaseDetails this is the calculated transaction fee. |   |
+| 7 | pending_amount          | int    | Pending amount for this payment that will be unfrozen later. If e.g. it's a Purchase's PaymentDetails and a part of transaction sum is withheld to form a rolling reserve, this field will be equal to the frozen part amount. |   |
+| 8 | pending_unfreeze_on     | int    | Informs when the `pending_amount` will be unfrozen.                                                   |   |
+| 9 | description             | string | Payment description                                                                                   |   |
+|10 | paid_on                 | int    | When the payment was accepted in (is_outgoing == false) or sent from (is_outgoing == true) the gateway system. |   |
+|11 | remote_paid_on          | int    | If available, this field will report the date the payment was sent by the remote payer (is_outgoing == false) or when funds arrived to the remote beneficiary (is_outgoing == true). |   |
+
+### Issuer_details object structure
+
+Read-only details of issuer company/brand, persisted for invoice display.
+
+| № | Parameter name          | Type   | Description                                                                                           |   |
+|---|-------------------------|--------|-------------------------------------------------------------------------------------------------------|---|
+| 1 | website                 | string | Company website URL (maxLength: 200)                                                                  |   |
+| 2 | legal_street_address    | string | Street house number and flat address where applicable (maxLength: 128)                                |   |
+| 3 | legal_country           | string | Country code in the ISO 3166-1 alpha-2 format (e.g. 'GB') (maxLength: 2)                              |   |
+| 4 | legal_city              | string | City name (maxLength: 128)                                                                            |   |
+| 5 | legal_zip_code          | string | ZIP or postal code (maxLength: 32)                                                                    |   |
+| 6 | bank_accounts           | object | Object of bank accounts                                                                               |   |
+| 7 | legal_name              | string | Legal name of company (maxLength: 128)                                                                |   |
+| 8 | brand_name              | string | Company brand name (maxLength: 128)                                                                   |   |
+| 9 | registration_number     | string | Registration number of company (maxLength: 32)                                                        |   |
+|10 | tax_number              | string | Tax payer registration number (maxLength: 32)                                                         |   |
+
+bank_accounts - object of company bank accounts, which contain bank account row: 
+bank_account  - Bank account number (e.g. IBAN) string maxLength: 34 
+bank_code     - SWIFT/BIC code of the bank (e.g. IBAN) string maxLength: 11
+
+### Transaction_data object structure
+
+Payment method-specific, read-only transaction data. Will contain information about all the transaction attempts and possible errors, if available.
+
+| № | Parameter name          | Type   | Description                                                                                           |   |
+|---|-------------------------|--------|-------------------------------------------------------------------------------------------------------|---|
+| 1 | payment_method          | string | Payment method used if Purchase was paid, blank string otherwise.                                     |   |
+| 2 | extra                   | object | Extra data associated with selected payment method if Purchase was paid, empty object otherwise. Dataset depends on payment method. E.g. for card payment methods like visa or mastercard it will contain properties masked_pan: string, three_d_secure: boolean and cardholder_name: string. |   |
+| 3 | country                 | string | Country code (in the ISO 3166-1 alpha-2 format e.g. 'GB') where payment tool used originates (e.g. in case of card payments, the card issuing country). Will be blank if Purchase was not paid or country could not be detected. |   |
+| 4 | attempts                | object | Will contain information about all the payment attempts made and errors encountered, if any.          |   |
+
+### Transaction_data Attempts object structure  
+
+Will contain information about all the payment attempts made and errors encountered, if any.
+
+| № | Parameter name          | Type   | Description                                                                                           |   |
+|---|-------------------------|--------|-------------------------------------------------------------------------------------------------------|---|
+| 1 | type                    | string | Type of action attempted, takes following values: [ execute, authorize, release, capture, recurring_execute, delete_recurring_token, refund ] |   |
+| 2 | successful              | bool   | If this attempt was successful or not. For false, error of this attempt will be not null.             |   |
+| 3 | payment_method          | string | Payment method used for this attempt.                                                                 |   |
+| 4 | extra                   | object | Extra data associated with selected payment method. Dataset depends on payment method. E.g. for card payment methods like visa or mastercard it will contain properties masked_pan: string, three_d_secure: boolean and cardholder_name: string. |   |
+| 5 | country                 | string | Country code (in the ISO 3166-1 alpha-2 format e.g. 'GB') where payment tool used originates (e.g. in case of card payments, the card issuing country). Will be blank if country could not be detected. |   |
+| 6 | client_ip               | string | IP the paying client made this attempt from, if available.                                            |   |
+| 7 | processing_time         | int    | Time (if possible, fetched from the remot processing system) this attempt happened at.                |   |
+| 8 | error                   | object | Contains code and message fields. Code - contains an error code, message - contains an error message  |   |
+
+### Transaction_data Attempts error codes
+
+| № | Code                                            | Description                                                                   |   |
+|---|-------------------------------------------------|-------------------------------------------------------------------------------|---|
+| 1 | unknown_payment_method                          | Unknown payment method                                                        |   |
+| 2 | invalid_card_number                             | Invalid card number                                                           |   |
+| 3 | invalid_expires                                 | Invalid expires                                                               |   |
+| 4 | no_matching_terminal                            | No matching terminal                                                          |   |
+| 5 | blacklisted_tx                                  | Blacklisted transaction: blocked (general)                                    |   |
+| 6 | timeout_3ds_enrollment_check                    | 3DS enrollment check timeout.                                                 |   |
+| 7 | timeout_acquirer_status_check                   | Timeout checking payment status with acquirer                                 |   |
+| 8 | validation_card_details_missing                 | Card data field values are missing from request                               |   |
+| 8 | validation_cvc_not_provided                     | cvc field not provided                                                        |   |
+| 8 | validation_cardholder_name_not_provided         | cardholder_name field not provided                                            |   |
+| 8 | validation_card_number_not_provided             | card_number field not provided                                                |   |
+| 8 | validation_expires_not_provided                 | expires field not provided                                                    |   |
+| 8 | validation_cvc_too_long                         | cvc is too long                                                               |   |
+| 8 | validation_cardholder_name_too_long             | cardholder_name is too long                                                   |   |
+| 8 | validation_card_number_too_long                 | card_number is too long                                                       |   |
+| 8 | validation_expires_too_long                     | expires is too long                                                           |   |
+| 8 | validation_cvc_invalid                          | cvc is invalid                                                                |   |
+| 8 | validation_cardholder_name_invalid              | cardholder_name is too long or invalid                                        |   |
+| 8 | validation_card_number_invalid                  | card_number is invalid                                                        |   |
+| 8 | validation_expires_invalid                      | expires is invalid                                                            |   |
+| 8 | acquirer_connection_error                       | Acquirer connection error                                                     |   |
+| 8 | blacklisted_tx_issuing_country                  | Blacklisted transaction: issuing country                                      |   |
+| 8 | s2s_not_supported                               | Server-to-server flow not supported by processing                             |   |
+| 8 | timeout                                         | Operation timeout                                                             |   |
+| 8 | general_transaction_error                       | Unrecognized transaction error                                                |   |
+| 8 | antifraud_general                               | Decline, fraud                                                                |   |
+| 8 | 3ds_authentication_failed                       | 3DS authentication failed                                                     |   |
+| 8 | do_not_honour                                   | Do not honour (the transaction was declined by the Issuer without definition or reason). |   |
+| 8 | payment_rejected_other_reason                   | Payment rejected (other reason)                                               |   |
+| 8 | exceeds_withdrawal_limit                        | Exceeds withdrawal limit                                                      |   |
+| 8 | exceeded_account_limit                          | Exceeded account limit                                                        |   |
+| 8 | expired_card                                    | Expired card                                                                  |   |
+| 8 | blacklisted_tx_risk_score                       | Blacklisted transaction: risk score                                           |   |
+| 8 | transaction_not_supported_or_not_valid_for_card | The transaction request presented is not supported or is not valid for the card number presented. |   |
+| 8 | exceeded_acquirer_refund_amount                 | Exceeded refundable amount defined by acquirer                                |   |
+| 8 | transaction_not_permitted_on_terminal           | Transaction not permitted on terminal (this card does not support the type of transaction requested). |   |
+| 8 | acquirer_internal_error                         | Acquirer internal error                                                       |   |
+| 8 | transaction_not_permitted_to_cardholder         | Transaction not permitted to cardholder                                       |   |
+| 8 | invalid_issuer_number                           | No such issuer (the Issuer number is not valid).                              |   |
+| 8 | restricted_card                                 | Restricted card                                                               |   |
+| 8 | merchant_response_timeout                       | Timeout of merchant response exceeded                                         |   |
+| 8 | reconcile_error                                 | Reconcilation error                                                           |   |
+| 8 | lost_card                                       | Lost card                                                                     |   |
+| 8 | stolen_card                                     | Stolen card                                                                   |   |
+| 8 | invalid_amount                                  | Invalid amount                                                                |   |
+| 8 | re_enter_transaction                            | Re enter transaction                                                          |   |
+| 8 | security_violation                              | Security violation                                                            |   |
+| 8 | partial_forbidden                               | Intervene, bank approval required for partial amount                          |   |
+| 8 | suspected_fraud                                 | Decline, suspected fraud                                                      |   |
+| 8 | acquirer_routing_error                          | Acquirer routing error                                                        |   |
+| 8 | acquirer_configuration_error                    | Acquirer configuration error                                                  |   |
+| 8 | invalid_card_data                               | Invalid card data provided                                                    |   |
+| 8 | issuer_not_available                            | Issuer Not Available                                                          |   |
+| 8 | exceeded_terminal_limit                         | Exceeded terminal limit                                                       |   |
+
+### Error Response
 
 > Error Response
  
