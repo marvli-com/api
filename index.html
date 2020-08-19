@@ -230,7 +230,7 @@
             <a href="#purchases" class="toc-h1 toc-link" data-title="Purchases">Purchases</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#purchases-create-a-purchase-the-main-request-for-any-e-commerce-integration" class="toc-h2 toc-link" data-title="/purchases/ Create a Purchase. The main request for any e-commerce integration.">/purchases/ Create a Purchase. The main request for any e-commerce integration.</a>
+                    <a href="#api-market-v1-new_payment-create-a-purchase-the-main-request-for-any-e-commerce-integration" class="toc-h2 toc-link" data-title="/api/market/v1/new_payment Create a Purchase. The main request for any e-commerce integration.">/api/market/v1/new_payment Create a Purchase. The main request for any e-commerce integration.</a>
                   </li>
                   <li>
                     <a href="#request-body" class="toc-h2 toc-link" data-title="Request body">Request body</a>
@@ -279,12 +279,11 @@ request body buffer.</p>
 <p>The public key for authenticating a Webhooks is available on Webhook.public_key of the corresponding Webhook.
 The public key for authenticating success callbacks can be retrieved with GET /public_key/.
 Please note the Gateway provider is not responsible for any financial loses incurred due to not implementing payload signature verification.</p>
-<h1 id='purchases'>Purchases</h1><h2 id='purchases-create-a-purchase-the-main-request-for-any-e-commerce-integration'>/purchases/ Create a Purchase. The main request for any e-commerce integration.</h2>
-<p>To run payments in your application use POST /purchases/, request to register payments and receive the checkout link (checkout_url). 
+<h1 id='purchases'>Purchases</h1><h2 id='api-market-v1-new_payment-create-a-purchase-the-main-request-for-any-e-commerce-integration'>/api/market/v1/new_payment Create a Purchase. The main request for any e-commerce integration.</h2>
+<p>To run payments in your application use POST /api/market/v1/new_payment, request to register payments and receive the checkout link (checkout_url). 
 After the payment is processed, gateway will redirect the client back to your website (take note of success_redirect, failure_redirect).</p>
 
-<p>You have three options to check payment status: 1) use success_calback parameter of Purchase object; 2) use GET /purchases/<purchase_id>/ request; 3)
- set up a Webhook using the UI or Webhook API to listen to purchase.paid or purchase.payment_failure event on your server.</p>
+<p>You have three options to check payment status: 1) use success_calback parameter of Purchase object; 2) set up a Webhook using the UI or Webhook API to listen to purchase.paid or purchase.payment_failure event on your server.</p>
 
 <p>Using skip_capture flag allows you to separate the authentication and payment execution steps, allowing you to reserve funds on payer’s card 
 account for some time. This flag can also enable preauthorization capability, allowing you to save the card without a financial transaction, if available.</p>
